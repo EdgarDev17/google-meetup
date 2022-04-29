@@ -63,10 +63,11 @@ const Participant = ({ participant }) => {
     }, [audioTracks]);
 
     return (
-        <div className="participant">
-            <h3>{participant.identity}</h3>
+        // este es el contenedor de la camara del participante
+        <div className="w-80">
             <video ref={videoRef} autoPlay={true} />
             <audio ref={audioRef} autoPlay={true} muted={true} />
+            <p className={'text-center my-1'}>{participant.identity}</p>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-const {videoToken} =  require('../../libs/getToken')
+const {videoToken} =  require('../../../libs/getToken')
 
 export default function handler(req, res) {
     if (req.method === 'POST') {
