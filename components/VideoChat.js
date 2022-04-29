@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import Room from "./Room";
-import Lobby from "./Lobby";
+import Form from "./Form";
 import Video from "twilio-video";
 
 function VideoChat() {
@@ -10,22 +10,22 @@ function VideoChat() {
     const [connecting, setConnecting] = useState(false)
 
 
-    // con este metodo manejamos cada vez que el usuario edite el input de su nombre
+    // con este metodo manejo cada vez que el usuario edite el input de su nombre
     const handleUserName = useCallback(event => {
         setUsername(event.target.value)
     }, [])
 
-    // con este metodo manejamos cada vez que el usuario edite el input del room
+    // con este metodo manejo cada vez que el usuario edite el input del room
     const handleRoomName = useCallback(event => {
         setRoomName(event.target.value)
     }, [])
 
-
+// con este callback manejo el evento del boton submit en el formulario para crear un room
     const handleSumbit = useCallback(async (event) => {
         event.preventDefault();
         setConnecting(true);
 
-        const response = await fetch('/api/token', {
+        const response = await fetch('/api/video/token', {
             method: "POST",
             body: JSON.stringify({
                 identity: username,
@@ -86,10 +86,15 @@ function VideoChat() {
 
     let render;
     if (room) {
-        render = (<Room room={room} roomName={roomName} handleLogout={handleLogOut}/>)
+
+        render = (
+            <Room room={room} roomName={roomName} handleLogout={handleLogOut}/>
+        )
     } else {
-        render = (<Lobby username={username} handleSubmit={handleSumbit} connecting={connecting} roomName={roomName}
-                         handleUsernameChange={handleUserName} handleRoomNameChange={handleRoomName}/>)
+        render = (
+            <Form username={username} handleSubmit={handleSumbit} connecting={connecting} roomName={roomName}
+                  handleUsernameChange={handleUserName} handleRoomNameChange={handleRoomName}/>
+        )
     }
 
     return render

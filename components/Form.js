@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Lobby({
+function Form({
                    username,
                    handleUsernameChange,
                    roomName,
@@ -25,7 +25,7 @@ function Lobby({
                 </div>
 
                 <div className={'flex flex-col my-5'}>
-                    <label className={'mr-3'} htmlFor="room">Room name:</label>
+                    <label className={'mr-3'} htmlFor="room">Código de la sala:</label>
                     <input
                         className={'w-80 border border-gray-300 rounded-md px-3 py-2'}
                         type="text"
@@ -45,4 +45,4 @@ function Lobby({
     );
 }
 
-export default Lobby;
+export default Form;
