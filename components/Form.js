@@ -1,20 +1,27 @@
-import React from 'react';
+import React from 'react'
+import Button from './buttons/Button'
+import Title from './Title';
 
 function Form({
-                   username,
-                   handleUsernameChange,
-                   roomName,
-                   handleRoomNameChange,
-                   handleSubmit,
-                   connecting,
-               }) {
+    username,
+    handleUsernameChange,
+    roomName,
+    handleRoomNameChange,
+    handleSubmit,
+    connecting,
+}) {
     return (
-        <div>
+        <div className='flex justify-center items-center'>
             <form onSubmit={handleSubmit}>
                 <div className={'flex flex-col my-5'}>
-                    <label className={'mr-3'} htmlFor="name">Ingresa tu nombre de usuario:</label>
+                    <h1 className='text-xl font-bold my-5'>Bienvenido! 👋🏼</h1> 
+                    <label className={'mr-3'} htmlFor="name">
+                        Ingresa tu nombre de usuario:
+                    </label>
                     <input
-                        className={'w-80 border border-gray-300 rounded-md px-3 py-2'}
+                        className={
+                            'w-80 border border-gray-300 rounded-md px-3 py-2'
+                        }
                         type="text"
                         id="field"
                         value={username}
@@ -25,9 +32,13 @@ function Form({
                 </div>
 
                 <div className={'flex flex-col my-5'}>
-                    <label className={'mr-3'} htmlFor="room">Código de la sala:</label>
+                    <label className={'mr-3'} htmlFor="room">
+                        Código de la sala:
+                    </label>
                     <input
-                        className={'w-80 border border-gray-300 rounded-md px-3 py-2'}
+                        className={
+                            'w-80 border border-gray-300 rounded-md px-3 py-2'
+                        }
                         type="text"
                         id="room"
                         value={roomName}
@@ -37,12 +48,15 @@ function Form({
                     />
                 </div>
 
-                <button className={'w-80 bg-black px-7 py-2 rounded text-white'} type="submit" disabled={connecting}>
-                    {connecting ? "Conectando..." : "Unirse a la llamada"}
-                </button>
+                <Button
+                    type={'submit'}
+                    disabled={connecting}
+                    label={connecting ? 'Conectando...' : 'Unirse a la llamada'}
+                />
+                
             </form>
         </div>
-    );
+    )
 }
 
-export default Form;
+export default Form

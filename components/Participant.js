@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Participant = ({ participant }) => {
+const Participant = ({ participant, mutedSound }) => {
     const [videoTracks, setVideoTracks] = useState([]);
     const [audioTracks, setAudioTracks] = useState([]);
 
     const videoRef = useRef();
     const audioRef = useRef();
 
-    const trackpubsToTracks = (trackMap) =>
-        Array.from(trackMap.values())
+    //Se encarga de manejar todos los tracks enviados por la API
+    const trackpubsToTracks = (trackMap) => Array.from(trackMap.values())
             .map((publication) => publication.track)
             .filter((track) => track !== null);
 
@@ -66,7 +66,7 @@ const Participant = ({ participant }) => {
         // este es el contenedor de la camara del participante
         <div className="w-80">
             <video ref={videoRef} autoPlay={true} />
-            <audio ref={audioRef} autoPlay={true} muted={true} />
+            <audio ref={audioRef} autoPlay={true} />
             <p className={'text-center my-1'}>{participant.identity}</p>
         </div>
     );

@@ -1,11 +1,14 @@
-import React from 'react';
+import { useState } from 'react'
+/*
+@param size only accept small, medium and large as Strings values.
+*/
 
-function Title({label}) {
+function Title({ label }) {
     return (
         <>
-         <h1 className={'font-bold text-5xl'}>{label}</h1>
+            <h1 className={`font-bold my-1 text-5xl `}>{label}</h1>
         </>
-    );
+    )
 }
 
-export default Title;
+export default Title
