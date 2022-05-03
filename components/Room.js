@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Participant from './Participant'
 function Room({ roomName, room, handleLogout }) {
-
     const [participants, setParticipants] = useState([])
     const [mutedSound, setMutedSound] = useState(true)
 
@@ -31,26 +30,31 @@ function Room({ roomName, room, handleLogout }) {
         }
     }, [room])
 
-    
-    const muteAudio = () =>{
-        room.localParticipant.audioTracks.forEach((publication)=>{
+    const remoteParticipants = participants.map((participant) => (
+        <Participant key={participant.sid} participant={participant} />
+    ))
+
+    const muteAudio = () => {
+        room.localParticipant.audioTracks.forEach((publication) => {
             publication.track.disable()
         })
     }
-      
-    const unMuteAudio = () =>{
-        room.localParticipant.audioTracks.forEach((publication)=>{
+
+    const unMuteAudio = () => {
+        room.localParticipant.audioTracks.forEach((publication) => {
             publication.track.enable()
         })
     }
 
-    const remoteParticipants = participants.map((participant) => (
-        <Participant key={participant.sid} participant={participant}/>
-    ))
-
-    //encargado de silenciar y activar el audio
-    const handleMutedSound = () =>{
-        setMutedSound(!mutedSound)
+    const disableCamera = () => {
+        room.localParticipant.videoTracks.forEach((publication) => {
+            publication.track.disable()
+        })
+    }
+    const enableCamera = () => {
+        room.localParticipant.videoTracks.forEach((publication) => {
+            publication.track.enable()
+        })
     }
 
     return (
@@ -79,28 +83,56 @@ function Room({ roomName, room, handleLogout }) {
                 </div>
             </div>
 
-                <div className='w-full flex justify-center'>
-                    <button
-                        className={
-                            'w-56 rounded-md  bg-black px-7 py-1 text-white'
-                        }
-                        onClick={handleLogout}
-                    >
-                        Salir
-                    </button>
-                    <button
-                        className={mutedSound ? 'w-56 rounded-md  bg-black px-7 py-1 text-white':
-                            'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'}
-                        onClick={unMuteAudio}>
-                        Activar audio
-                    </button>
-                    <button
-                        className={mutedSound ? 'w-56 rounded-md  bg-black px-7 py-1 text-white':
-                            'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'}
-                        onClick={muteAudio}>
-                        Silenciar
-                    </button>
-                </div>
+            <div className="w-full flex justify-center">
+                <button
+                    className={'w-56 rounded-md  bg-black px-7 py-1 text-white'}
+                    onClick={handleLogout}
+                >
+                    Salir
+                </button>
+                <button
+                    className={
+                        mutedSound
+                            ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
+                            : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
+                    }
+                    onClick={unMuteAudio}
+                >
+                    Activar audio
+                </button>
+                <button
+                    className={
+                        mutedSound
+                            ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
+                            : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
+                    }
+                    onClick={muteAudio}
+                >
+                    Silenciar
+                </button>
+
+                <button
+                    className={
+                        mutedSound
+                            ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
+                            : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
+                    }
+                    onClick={disableCamera}
+                >
+                    Quitar camara
+                </button>
+
+                <button
+                    className={
+                        mutedSound
+                            ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
+                            : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
+                    }
+                    onClick={enableCamera}
+                >
+                    Activar camara
+                </button>
+            </div>
         </>
     )
 }

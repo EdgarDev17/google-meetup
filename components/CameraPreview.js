@@ -29,8 +29,9 @@ export default function CameraPreview({ handlePreview }) {
 				<button
 					onClick={() => {
 						handlePreview(false)
-						localVideoTrack.detach()
-						localVideoTrack.stop()
+						localVideoTrack.forEach((publication) => {
+							publication.disable()
+						})
 					}}
 					className='bg-red-400 px-7 py-2 mt-5 rounded text-white'
 				>
