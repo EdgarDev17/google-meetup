@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Participant from './Participant'
+import { muteAudio, unMuteAudio } from '../Hooks/room/useAudio'
+import { disableCamera, enableCamera } from '../Hooks/room/useVideo'
+
 function Room({ roomName, room, handleLogout }) {
     const [participants, setParticipants] = useState([])
     const [mutedSound, setMutedSound] = useState(true)
@@ -34,29 +37,6 @@ function Room({ roomName, room, handleLogout }) {
         <Participant key={participant.sid} participant={participant} />
     ))
 
-    const muteAudio = () => {
-        room.localParticipant.audioTracks.forEach((publication) => {
-            publication.track.disable()
-        })
-    }
-
-    const unMuteAudio = () => {
-        room.localParticipant.audioTracks.forEach((publication) => {
-            publication.track.enable()
-        })
-    }
-
-    const disableCamera = () => {
-        room.localParticipant.videoTracks.forEach((publication) => {
-            publication.track.disable()
-        })
-    }
-    const enableCamera = () => {
-        room.localParticipant.videoTracks.forEach((publication) => {
-            publication.track.enable()
-        })
-    }
-
     return (
         <>
             <div className={'w-full h-full'}>
@@ -90,26 +70,6 @@ function Room({ roomName, room, handleLogout }) {
                 >
                     Salir
                 </button>
-                <button
-                    className={
-                        mutedSound
-                            ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
-                            : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
-                    }
-                    onClick={unMuteAudio}
-                >
-                    Activar audio
-                </button>
-                <button
-                    className={
-                        mutedSound
-                            ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
-                            : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
-                    }
-                    onClick={muteAudio}
-                >
-                    Silenciar
-                </button>
 
                 <button
                     className={
@@ -117,7 +77,7 @@ function Room({ roomName, room, handleLogout }) {
                             ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
                             : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
                     }
-                    onClick={disableCamera}
+                    onClick={() => disableCamera(room)}
                 >
                     Quitar camara
                 </button>
@@ -128,7 +88,7 @@ function Room({ roomName, room, handleLogout }) {
                             ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
                             : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
                     }
-                    onClick={enableCamera}
+                    onClick={() => enableCamera(room)}
                 >
                     Activar camara
                 </button>

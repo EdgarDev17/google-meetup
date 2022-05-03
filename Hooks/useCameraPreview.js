@@ -1,3 +1,0 @@
-const useCameraPreview = (e) = {
-
-}
