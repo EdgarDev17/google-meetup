@@ -64,8 +64,9 @@ const Participant = ({ participant }) => {
 
     return (
         // este es el contenedor de la camara del participante
-        <div className="w-80">
-            <video ref={videoRef} autoPlay={true} />
+        <div className="w-80 mx-1">
+            {/*En esta parte es donde puedo editar el frame donde se muestra el video*/}
+            <video ref={videoRef} autoPlay={true} className={'rounded-md'}/>
             <audio ref={audioRef} autoPlay={true} />
             <p className={'text-center my-1'}>{participant.identity}</p>
         </div>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import Participant from './Participant'
-import { muteAudio, unMuteAudio } from '../Hooks/room/useAudio'
-import { disableCamera, enableCamera } from '../Hooks/room/useVideo'
+import {muteAudio, unMuteAudio} from '../Hooks/room/useAudio'
+import {disableCamera, enableCamera} from '../Hooks/room/useVideo'
 import Image from 'next/image'
 
-function Room({ roomName, room, handleLogout }) {
+function Room({roomName, room, handleLogout}) {
     const [participants, setParticipants] = useState([])
     const [mutedSound, setMutedSound] = useState(true)
     const [mutedCamera, setMutedCamera] = useState(false)
@@ -39,7 +39,7 @@ function Room({ roomName, room, handleLogout }) {
     }, [room])
 
     const remoteParticipants = participants.map((participant) => (
-        <Participant key={participant.sid} participant={participant} />
+        <Participant key={participant.sid} participant={participant}/>
     ))
 
     const handleMicButton = () => {
@@ -52,10 +52,10 @@ function Room({ roomName, room, handleLogout }) {
                         unMuteAudio(room)
                     }}
                     alt="mic"
-                    src={'/mic-off.svg'}
-                    width={50}
-                    height={50}
-                    className={'cursor-pointer'}
+                    src={'/mic-off.png'}
+                    width={40}
+                    height={40}
+                    className={'cursor-pointer mx-3'}
                 />
             )
         } else {
@@ -68,9 +68,9 @@ function Room({ roomName, room, handleLogout }) {
                     }}
                     alt="mic"
                     src={'/mic-on.svg'}
-                    width={50}
-                    height={50}
-                    className={'cursor-pointer'}
+                    width={40}
+                    height={40}
+                    className={'cursor-pointer mx-3'}
                 />
             )
         }
@@ -87,9 +87,9 @@ function Room({ roomName, room, handleLogout }) {
                     }}
                     alt="mic"
                     src={'/camera-off.png'}
-                    width={50}
-                    height={50}
-                    className={'cursor-pointer'}
+                    width={40}
+                    height={40}
+                    className={'cursor-pointer mx-3'}
                 />
             )
         } else {
@@ -101,9 +101,9 @@ function Room({ roomName, room, handleLogout }) {
                     }}
                     alt="mic"
                     src={'/camera-on.png'}
-                    width={50}
-                    height={50}
-                    className={'cursor-pointer'}
+                    width={40}
+                    height={40}
+                    className={'cursor-pointer mx-3'}
                 />
             )
         }
@@ -112,7 +112,7 @@ function Room({ roomName, room, handleLogout }) {
     return (
         <>
             <div className={'w-full h-full'}>
-                <h1 className="font-bold text-center my-3">{roomName}</h1>
+                <h1 className="font-medium text-center my-3">{'Código de la sala: ' + roomName}</h1>
                 {/*Este es el contenedor del participante local*/}
                 <div className="flex w-full">
                     <div>
@@ -135,19 +135,20 @@ function Room({ roomName, room, handleLogout }) {
                 </div>
             </div>
 
-            <div className="w-full flex justify-center">
-                <Image
-                    onClick={handleLogout}
-                    alt="hang up button"
-                    src={'/hang-up.png'}
-                    width={50}
-                    height={50}
-                    className={'cursor-pointer'}
-                />
-
+            <div className="w-full flex justify-center items-center">
                 {handleMicButton()}
                 {handleVideoButton()}
                 {micBtn}
+                <div className={'mx-5'}>
+                    <Image
+                        onClick={handleLogout}
+                        alt="hang up button"
+                        src={'/hang-up.png'}
+                        width={50}
+                        height={50}
+                        className={'cursor-pointer'}
+                    />
+                </div>
                 {camBtn}
             </div>
         </>
