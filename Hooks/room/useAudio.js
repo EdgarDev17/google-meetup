@@ -1,6 +1,5 @@
 
 const muteAudio = (room) => {
-    setMutedSound(true)
     room.localParticipant.audioTracks.forEach((publication) => {
         publication.track.disable()
     })
@@ -8,7 +7,6 @@ const muteAudio = (room) => {
 
 
 const unMuteAudio = (room) => {
-    setMutedSound(false)
     room.localParticipant.audioTracks.forEach((publication) => {
         publication.track.enable()
     })

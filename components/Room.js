@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Participant from './Participant'
 import { muteAudio, unMuteAudio } from '../Hooks/room/useAudio'
 import { disableCamera, enableCamera } from '../Hooks/room/useVideo'
+import Image from 'next/image'
 
 function Room({ roomName, room, handleLogout }) {
     const [participants, setParticipants] = useState([])
     const [mutedSound, setMutedSound] = useState(true)
+    const [mutedCamera, setMutedCamera] = useState(false)
+    let micBtn
+    let camBtn
+
 
     useEffect(() => {
         // cada vez que se agrega un nuevo participante se debe actualizar el array anterior
@@ -37,6 +42,73 @@ function Room({ roomName, room, handleLogout }) {
         <Participant key={participant.sid} participant={participant} />
     ))
 
+    const handleMicButton = () => {
+        if (mutedSound) {
+            //mostrar boton para activar el mic
+            micBtn = (
+                <Image
+                    onClick={() => {
+                        setMutedSound(false)
+                        unMuteAudio(room)
+                    }}
+                    alt="mic"
+                    src={'/mic-off.svg'}
+                    width={50}
+                    height={50}
+                    className={'cursor-pointer'}
+                />
+            )
+        } else {
+            // mostrar el boton para desactivar el mic
+            micBtn = (
+                <Image
+                    onClick={() => {
+                        setMutedSound(true)
+                        muteAudio(room)
+                    }}
+                    alt="mic"
+                    src={'/mic-on.svg'}
+                    width={50}
+                    height={50}
+                    className={'cursor-pointer'}
+                />
+            )
+        }
+    }
+
+    const handleVideoButton = () => {
+        if (mutedCamera) {
+            //mostrar el boton para activar la camara
+            camBtn = (
+                <Image
+                    onClick={() => {
+                        setMutedCamera(false)
+                        enableCamera(room)
+                    }}
+                    alt="mic"
+                    src={'/camera-off.png'}
+                    width={50}
+                    height={50}
+                    className={'cursor-pointer'}
+                />
+            )
+        } else {
+            camBtn = (
+                <Image
+                    onClick={() => {
+                        setMutedCamera(true)
+                        disableCamera(room)
+                    }}
+                    alt="mic"
+                    src={'/camera-on.png'}
+                    width={50}
+                    height={50}
+                    className={'cursor-pointer'}
+                />
+            )
+        }
+    }
+
     return (
         <>
             <div className={'w-full h-full'}>
@@ -56,7 +128,7 @@ function Room({ roomName, room, handleLogout }) {
 
                     {/*Contenedor de cada uno de los participantes remotos*/}
                     <div>
-                        <div className=" grid grid-cols-3 gap-1 ">
+                        <div className=" mx-5 grid grid-cols-3 gap-1 ">
                             {remoteParticipants}
                         </div>
                     </div>
@@ -64,34 +136,19 @@ function Room({ roomName, room, handleLogout }) {
             </div>
 
             <div className="w-full flex justify-center">
-                <button
-                    className={'w-56 rounded-md  bg-black px-7 py-1 text-white'}
+                <Image
                     onClick={handleLogout}
-                >
-                    Salir
-                </button>
+                    alt="hang up button"
+                    src={'/hang-up.png'}
+                    width={50}
+                    height={50}
+                    className={'cursor-pointer'}
+                />
 
-                <button
-                    className={
-                        mutedSound
-                            ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
-                            : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
-                    }
-                    onClick={() => disableCamera(room)}
-                >
-                    Quitar camara
-                </button>
-
-                <button
-                    className={
-                        mutedSound
-                            ? 'w-56 rounded-md  bg-black px-7 py-1 text-white'
-                            : 'w-56 rounded-md  bg-red-500 px-7 py-1 text-white'
-                    }
-                    onClick={() => enableCamera(room)}
-                >
-                    Activar camara
-                </button>
+                {handleMicButton()}
+                {handleVideoButton()}
+                {micBtn}
+                {camBtn}
             </div>
         </>
     )
