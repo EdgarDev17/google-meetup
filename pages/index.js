@@ -3,8 +3,8 @@ import Image from 'next/image'
 import Footer from '../components/Footer'
 import React, {useState} from 'react'
 import CameraPreview from './../components/CameraPreview'
-import Button from '../components/buttons/Button'
 import Link from 'next/link'
+import {motion} from "framer-motion"
 
 function Home() {
     const [showPreview, setShowPreview] = useState(false)
@@ -20,9 +20,11 @@ function Home() {
         </div>
     )
 
+
     return (
         <>
-            <div className={'flex justify-center items-center'}>
+
+            <div className={'flex justify-center items-center overflow-y-hidden'}>
                 {/* aca se muestra una preview de la camara cuando el usuario lo pida */}
                 {showPreview ? cameraPreview : ''}
 
@@ -42,14 +44,9 @@ function Home() {
                             </h3>
                             <p className={'text-slate-700 mt-1'}>
                                 Puedes utilizarlo para realizar reuniones con
-                                amigos, familia o equipos de trabajo
+                                amigos, familia o equipos de trabajo.
                             </p>
                         </div>
-
-                        {/* <Button
-                            label={'Probrar camara y audio'}
-                            type={'button'}
-                        /> */}
 
                         <div className='flex flex-col my-8'>
                             <button
@@ -69,17 +66,21 @@ function Home() {
                             </Link>
                         </div>
                     </div>
-
-                    <Image
-                        alt={'Landing page image'}
-                        src={'/group.svg'}
-                        height={700}
-                        width={700}
-                    />
+                    <motion.div
+                        animate={{scale: [0.5, 1]}}
+                        transition={{ease: "easeIn", duration: 0.5}}
+                    >
+                        <Image
+                            alt={'Landing page image'}
+                            src={'/group.svg'}
+                            height={700}
+                            width={700}
+                        />
+                    </motion.div>
                 </div>
             </div>
             <div className={'my-5'}>
-                <Footer/>
+                    <Footer/>
             </div>
         </>
     )

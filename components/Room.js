@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Participant from './Participant'
-import {muteAudio, unMuteAudio} from '../Hooks/room/useAudio'
-import {disableCamera, enableCamera} from '../Hooks/room/useVideo'
+import {muteAudio, unMuteAudio} from '../utils/room/useAudio'
+import {disableCamera, enableCamera} from '../utils/room/useVideo'
 import Image from 'next/image'
 
 function Room({roomName, room, handleLogout}) {

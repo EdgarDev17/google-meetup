@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import Room from './Room'
 import Form from './Form'
 import Video from 'twilio-video'
@@ -88,7 +88,7 @@ function VideoChat() {
     let render
     if (room) {
         render = (
-            <Room room={room} roomName={roomName} handleLogout={handleLogOut} />
+            <Room room={room} roomName={roomName} handleLogout={handleLogOut}/>
         )
     } else {
         render = (
