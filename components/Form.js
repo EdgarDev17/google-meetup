@@ -1,21 +1,25 @@
 import React from 'react'
 import Button from './buttons/Button'
 import Title from './Title';
+import {motion} from "framer-motion"
 
 function Form({
-    username,
-    handleUsernameChange,
-    roomName,
-    handleRoomNameChange,
-    handleSubmit,
-    connecting,
-}) {
+                  username,
+                  handleUsernameChange,
+                  roomName,
+                  handleRoomNameChange,
+                  handleSubmit,
+                  connecting,
+              }) {
     return (
-        <div className='flex justify-center items-center'>
+        <motion.div
+            animate={{scale: [0.3, 1]}}
+            transition={{ease: "easeIn", duration: 0.5}}
+        >
             <form onSubmit={handleSubmit}>
+                <h1 className='text-xl text-center font-bold my-5'>Bienvenido! 👋🏼</h1>
                 <div className={'flex flex-col my-5'}>
-                    <h1 className='text-xl font-bold my-5'>Bienvenido! 👋🏼</h1> 
-                    <label className={'mr-3'} htmlFor="name">
+                    <label htmlFor="name">
                         Ingresa tu nombre de usuario:
                     </label>
                     <input
@@ -48,14 +52,19 @@ function Form({
                     />
                 </div>
 
-                <Button
-                    type={'submit'}
-                    disabled={connecting}
-                    label={connecting ? 'Conectando...' : 'Unirse a la llamada'}
-                />
-                
+                <motion.div
+                    whileHover={{scale: 1.1}}
+                >
+                    <Button
+                        type={'submit'}
+                        disabled={connecting}
+                        label={connecting ? 'Conectando...' : 'Unirse a la llamada'}
+                    />
+
+                </motion.div>
+
             </form>
-        </div>
+        </motion.div>
     )
 }
 

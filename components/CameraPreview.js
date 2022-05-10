@@ -3,8 +3,8 @@ import {useRef, useState, useEffect} from 'react'
 import {motion} from 'framer-motion'
 
 export default function CameraPreview({handlePreview}) {
-    const [localVideoTrack, setLocalVideoTrack] = useState(null) // Este es el video del participante : LocalVideoTrack
-    const [videoTrackID, setVideoTrackID] = useState('') // el Id del video
+    const [localVideoTrack, setLocalVideoTrack] = useState(null) // Este es el video del participante: LocalVideoTrack
+    const [videoTrackID, setVideoTrackID] = useState('') // el ID del video
 
     const videoRef = useRef()
 

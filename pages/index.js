@@ -8,7 +8,6 @@ import {motion} from "framer-motion"
 
 function Home() {
     const [showPreview, setShowPreview] = useState(false)
-    const [isRoomFullScreen, setIsRoomFullScreen] = useState(false)
 
     const handleCameraPreview = (isShown) => {
         setShowPreview(isShown)
@@ -66,6 +65,7 @@ function Home() {
                             </Link>
                         </div>
                     </div>
+
                     <motion.div
                         animate={{scale: [0.5, 1]}}
                         transition={{ease: "easeIn", duration: 0.5}}

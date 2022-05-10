@@ -92,14 +92,16 @@ function VideoChat() {
         )
     } else {
         render = (
-            <Form
-                username={username}
-                handleSubmit={handleSumbit}
-                connecting={connecting}
-                roomName={roomName}
-                handleUsernameChange={handleUserName}
-                handleRoomNameChange={handleRoomName}
-            />
+            <div className={'w-full h-screen flex justify-center items-center'}>
+                <Form
+                    username={username}
+                    handleSubmit={handleSumbit}
+                    connecting={connecting}
+                    roomName={roomName}
+                    handleUsernameChange={handleUserName}
+                    handleRoomNameChange={handleRoomName}
+                />
+            </div>
         )
     }
 
