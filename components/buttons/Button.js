@@ -5,7 +5,7 @@
 import { useState } from 'react';
 
 const color = {
-    default:' w-80 bg-black px-7 py-2 mt-3 rounded text-white',
+    default:'w-80 bg-black px-7 py-2 mt-3 rounded text-white',
     black: 'w-80 bg-black px-7 py-2 mt-3 rounded text-white',
     green: 'w-80 bg-emerald-500 px-7 py-2 mt-3 rounded text-white',
 }
