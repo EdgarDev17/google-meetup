@@ -1,45 +1,20 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Participant from './Participant'
-import {muteAudio, unMuteAudio} from '../utils/room/useAudio'
-import {disableCamera, enableCamera} from '../utils/room/useVideo'
+import { muteAudio, unMuteAudio } from '../hooks/room/useAudio'
+import { disableCamera, enableCamera } from '../hooks/room/useVideo'
 import Image from 'next/image'
+import { useParticipant } from './../hooks/room/useParticipant'
 
-function Room({roomName, room, handleLogout}) {
-    const [participants, setParticipants] = useState([])
+function Room({ roomName, room, handleLogout }) {
+    // const [participants, setParticipants] = useState([]) 👈🏼 esto me lo refactorize en un hook
     const [mutedSound, setMutedSound] = useState(true)
     const [mutedCamera, setMutedCamera] = useState(false)
+    const { participants } = useParticipant(room)
     let micBtn
     let camBtn
 
-
-    useEffect(() => {
-        // cada vez que se agrega un nuevo participante se debe actualizar el array anterior
-        function participantConnected(participant) {
-            setParticipants((prevParticipants) => [
-                ...prevParticipants,
-                participant,
-            ])
-        }
-
-        // Lo que hace esta funcion es retornar un nuevo array, removiendo a la persona que ha salido de la sesion
-        function participantDisconnected(participant) {
-            setParticipants((prevParticipants) =>
-                prevParticipants.filter((person) => person !== participant)
-            )
-        }
-
-        room.on('participantConnected', participantConnected) // se ejecuta cada vez que un participante se conecta
-        room.on('participantDisconnected', participantDisconnected) // se ejecuta cada vez que un participante se desconecta
-        room.participants.forEach(participantConnected)
-
-        return () => {
-            room.off('participantConnected', participantConnected)
-            room.off('participantDisconnected', participantDisconnected)
-        }
-    }, [room])
-
     const remoteParticipants = participants.map((participant) => (
-        <Participant key={participant.sid} participant={participant}/>
+        <Participant key={participant.sid} participant={participant} />
     ))
 
     const handleMicButton = () => {
@@ -112,7 +87,9 @@ function Room({roomName, room, handleLogout}) {
     return (
         <>
             <div className={'w-full h-full'}>
-                <h1 className="font-medium text-center my-3">{'Código de la sala: ' + roomName}</h1>
+                <h1 className="font-medium text-center my-3">
+                    {'Código de la sala: ' + roomName}
+                </h1>
                 {/*Este es el contenedor del participante local*/}
                 <div className="flex w-full">
                     <div>

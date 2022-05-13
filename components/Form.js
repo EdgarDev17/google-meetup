@@ -79,7 +79,6 @@ function Form({
                 </div>
             </form>
             <div>
-                <p>Selecciona la camara que quieres utilizar 📷</p>
                 {/* <select ref={selectRef}>
                 </select> */}
             </div>
