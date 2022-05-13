@@ -3,6 +3,7 @@ import Button from './buttons/Button'
 import Title from './Title'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 function Form({
     username,
@@ -14,71 +15,88 @@ function Form({
 }) {
     // let selectRef = useRef()
     return (
-        <motion.div
-            animate={{ scale: [0.3, 1] }}
-            transition={{ ease: 'easeIn', duration: 0.5 }}
-        >
-            <form onSubmit={handleSubmit}>
-                <h1 className="text-xl text-center font-bold my-5">
-                    Bienvenido! 👋🏼
-                </h1>
-                <div className={'flex flex-col my-5'}>
-                    <label htmlFor="name">Ingresa tu nombre de usuario:</label>
-                    <input
-                        className={
-                            'w-80 border border-gray-300 rounded-md px-3 py-2'
-                        }
-                        type="text"
-                        id="field"
-                        value={username}
-                        onChange={handleUsernameChange}
-                        readOnly={connecting}
-                        required
-                    />
-                </div>
+        <div className={'px-32 py-20 bg-yellow-300 rounded-xl'}>
 
-                <div className={'flex flex-col my-5'}>
-                    <label className={'mr-3'} htmlFor="room">
-                        Código de la sala:
-                    </label>
-                    <input
-                        className={
-                            'w-80 border border-gray-300 rounded-md px-3 py-2'
-                        }
-                        type="text"
-                        id="room"
-                        value={roomName}
-                        onChange={handleRoomNameChange}
-                        readOnly={connecting}
-                        required
-                    />
-                </div>
-
-                <div className={'grid grid-cols-1 gap-3'}>
-                    <motion.div whileHover={{ scale: 1.1 }}>
-                        <Button
-                            type={'submit'}
-                            disabled={connecting}
-                            label={
-                                connecting
-                                    ? 'Conectando...'
-                                    : 'Unirse a la llamada'
-                            }
-                        />
-                    </motion.div>
-
-                    <Link href={'/'}>
-                        <a
+        <div className="flex bg-white shadow p-16 items-center justify-center gap-10 border border-gray-300 rounded-xl">
+            <motion.div
+                animate={{ scale: [0.3, 1] }}
+                transition={{ ease: 'easeIn', duration: 0.5 }}
+                >
+                <form onSubmit={handleSubmit}>
+                    <h1 className="text-xl text-center font-bold my-5">
+                        Bienvenido! 👋🏼
+                    </h1>
+                    <div className={'flex flex-col my-5'}>
+                        <label htmlFor="name">
+                            Ingresa tu nombre de usuario:
+                        </label>
+                        <input
                             className={
-                                'w-80 bg-red-500 px-7 py-2 text-center rounded text-white'
+                                'w-80 border border-gray-300 rounded-md px-3 py-2'
                             }
-                        >
-                            Volver al inicio
-                        </a>
-                    </Link>
-                </div>
-            </form>
-        </motion.div>
+                            type="text"
+                            id="field"
+                            value={username}
+                            onChange={handleUsernameChange}
+                            readOnly={connecting}
+                            required
+                            />
+                    </div>
+
+                    <div className={'flex flex-col my-5'}>
+                        <label className={'mr-3'} htmlFor="room">
+                            Código de la sala:
+                        </label>
+                        <input
+                            className={
+                                'w-80 border border-gray-300 rounded-md px-3 py-2'
+                            }
+                            type="text"
+                            id="room"
+                            value={roomName}
+                            onChange={handleRoomNameChange}
+                            readOnly={connecting}
+                            required
+                            />
+                    </div>
+
+                    <div className={'grid grid-cols-1 gap-3'}>
+                        <motion.div whileHover={{ scale: 1.1 }}>
+                            <Button
+                                type={'submit'}
+                                disabled={connecting}
+                                label={
+                                    connecting
+                                        ? 'Conectando...'
+                                        : 'Unirse a la llamada'
+                                }
+                            />
+                        </motion.div>
+
+                        <Link href={'/'}>
+                            <a
+                                className={
+                                    'w-80 bg-red-500 px-7 py-2 text-center rounded text-white'
+                                }
+                            >
+                                Volver al inicio
+                            </a>
+                        </Link>
+                    </div>
+                </form>
+            </motion.div>
+
+            <div>
+                <Image
+                    alt={'login image'}
+                    src={'/loginImg.svg'}
+                    width={350}
+                    height={350}
+                />
+            </div>
+        </div>
+        </div>
+        
     )
 }
 
