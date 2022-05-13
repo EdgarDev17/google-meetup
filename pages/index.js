@@ -21,9 +21,9 @@ function Home() {
 
     let bg = "bg-[url('/bg.png')]"
     return (
-        <div className={'h-screen bg-cover ' + bg}>
+        <div className={'h-screen bg-cover flex flex-col ' + bg}>
             <div
-                className={'flex justify-center items-center overflow-y-hidden'}
+                className={'h-screen flex justify-center items-center overflow-y-hidden'}
             >
                 {/* aca se muestra una preview de la camara cuando el usuario lo pida */}
                 {showPreview ? cameraPreview : ''}
@@ -79,8 +79,9 @@ function Home() {
                         />
                     </motion.div>
                 </div>
+                
             </div>
-            <div className={'my-5'}>
+            <div>
                 <Footer />
             </div>
         </div>
