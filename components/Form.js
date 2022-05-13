@@ -78,10 +78,6 @@ function Form({
                     </Link>
                 </div>
             </form>
-            <div>
-                {/* <select ref={selectRef}>
-                </select> */}
-            </div>
         </motion.div>
     )
 }

@@ -1,68 +1,20 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Room from './Room'
 import Form from './Form'
-import Video from 'twilio-video'
+import { useForm } from '../hooks/videoChat/useForm'
 
 function VideoChat() {
-    const [username, setUsername] = useState('')
-    const [roomName, setRoomName] = useState('')
-    const [room, setRoom] = useState(null)
-    const [connecting, setConnecting] = useState(false)
-
-    // con este metodo manejo cada vez que el usuario edite el input de su nombre
-    const handleUserName = useCallback((event) => {
-        setUsername(event.target.value)
-    }, [])
-
-    // con este metodo manejo cada vez que el usuario edite el input del room
-    const handleRoomName = useCallback((event) => {
-        setRoomName(event.target.value)
-    }, [])
-
-    // con este callback manejo el evento del boton submit en el formulario para crear un room
-    const handleSumbit = useCallback(
-        async (event) => {
-            event.preventDefault()
-            setConnecting(true)
-
-            const response = await fetch('/api/video/token', {
-                method: 'POST',
-                body: JSON.stringify({
-                    identity: username,
-                    room: roomName,
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).then((res) => res.json())
-
-            // si la peticion funciona de manera correcta
-            Video.connect(response.token, {
-                name: roomName,
-            })
-                .then((room) => {
-                    setConnecting(false)
-                    setRoom(room)
-                })
-                .catch((err) => {
-                    console.log('Something goes wrong with the room endpoint, check it out! 😕 ' + err)
-                    setConnecting(true)
-                })
-        },
-        [username, roomName]
-    )
-
-    const handleLogOut = useCallback(() => {
-        setRoom((prevRoom) => {
-            if (prevRoom) {
-                prevRoom.localParticipant.tracks.forEach((trackPub) => {
-                    trackPub.track.stop()
-                })
-                prevRoom.disconnect()
-            }
-            return null
-        })
-    }, [])
+    const {
+        handleRoomName,
+        handleUserName,
+        handleSumbit,
+        username,
+        roomName,
+        room,
+        connecting,
+        handleLogOut,
+    } = useForm()
+    let render
 
     useEffect(() => {
         if (room) {
@@ -85,10 +37,9 @@ function VideoChat() {
         }
     }, [room, handleLogOut])
 
-    let render
     if (room) {
         render = (
-            <Room room={room} roomName={roomName} handleLogout={handleLogOut}/>
+            <Room room={room} roomName={roomName} handleLogout={handleLogOut} />
         )
     } else {
         render = (
