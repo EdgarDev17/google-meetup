@@ -19,8 +19,9 @@ function Home() {
         </div>
     )
 
+    let bg = "bg-[url('/bg.png')]"
     return (
-        <>
+        <div className={'h-screen bg-cover ' + bg}>
             <div
                 className={'flex justify-center items-center overflow-y-hidden'}
             >
@@ -67,12 +68,12 @@ function Home() {
                     </div>
 
                     <motion.div
-                        animate={{ scale: [0.5, 1] }}
-                        transition={{ ease: 'easeIn', duration: 0.5 }}
+                        animate={{ scale: [0, 1] }}
+                        transition={{ ease: 'easeIn', duration: 1}}
                     >
                         <Image
                             alt={'Landing page image'}
-                            src={'/group.svg'}
+                            src={'/landingLogo.png'}
                             height={700}
                             width={700}
                         />
@@ -82,7 +83,7 @@ function Home() {
             <div className={'my-5'}>
                 <Footer />
             </div>
-        </>
+        </div>
     )
 }
 
