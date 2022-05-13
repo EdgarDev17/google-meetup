@@ -3,13 +3,13 @@ import Participant from './Participant'
 import { muteAudio, unMuteAudio } from '../hooks/room/useAudio'
 import { disableCamera, enableCamera } from '../hooks/room/useVideo'
 import Image from 'next/image'
-import { useParticipant } from './../hooks/room/useParticipant'
+import { useRoom } from './../hooks/room/useRoom'
 
 function Room({ roomName, room, handleLogout }) {
     // const [participants, setParticipants] = useState([]) 👈🏼 esto me lo refactorize en un hook
     const [mutedSound, setMutedSound] = useState(true)
     const [mutedCamera, setMutedCamera] = useState(false)
-    const { participants } = useParticipant(room)
+    const { participants } = useRoom(room)
     let micBtn
     let camBtn
 

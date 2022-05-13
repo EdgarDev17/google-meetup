@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export const useParticipant = (room) =>{
+export const useRoom = (room) =>{
     const [participants, setParticipants] = useState([])
 
     useEffect(() => {
