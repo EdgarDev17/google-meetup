@@ -8,6 +8,8 @@ import { motion } from 'framer-motion'
 
 function Home() {
     const [showPreview, setShowPreview] = useState(false)
+    let bg = "lg:bg-[url('/bg.png')]"
+    let bgMobile = "bg-[url('/bg-mobile.png')]"
 
     const handleCameraPreview = (isShown) => {
         setShowPreview(isShown)
@@ -19,18 +21,24 @@ function Home() {
         </div>
     )
 
-    let bg = "bg-[url('/bg.png')]"
     return (
-        <div className={'h-screen bg-cover flex flex-col ' + bg}>
+        <div
+            className={
+                'text-center lg:text-left mx-auto lg:w-full justify-center items-center h-screen bg-cover flex flex-col ' +
+                bg
+            }
+        >
             <div
-                className={'h-screen flex justify-center items-center overflow-y-hidden'}
+                className={
+                    'h-screen flex justify-center items-center overflow-y-hidden'
+                }
             >
                 {/* aca se muestra una preview de la camara cuando el usuario lo pida */}
                 {showPreview ? cameraPreview : ''}
 
                 <div
                     className={
-                        'flex container mx-auto justify-around items-center'
+                        'flex mx-auto justify-around items-center'
                     }
                 >
                     {/*contenedor de los titulos, formularios e imagen*/}
@@ -38,7 +46,7 @@ function Home() {
                         {/*Titulos del landing page*/}
                         <div>
                             <Title label={'Videollamadas para Todos'} />
-                            <h3 className={'font-medium text-lg mt-5'}>
+                            <h3 className={'font-medium lg:text-lg mt-10'}>
                                 En meet up puedes realizar video llamadas
                                 grupales
                             </h3>
@@ -48,18 +56,19 @@ function Home() {
                             </p>
                         </div>
 
-                        <div className="flex flex-col my-8">
+                        <div className="flex flex-col items-center my-8">
                             <button
-                                className="w-80 bg-emerald-500 px-7 py-2 mt-3
-                            rounded text-white"
+                                className="w-80 bg-emerald-500 py-2 mt-3
+                            rounded-xl text-white"
                                 onClick={() => handleCameraPreview(true)}
                             >
                                 Probrar camara y audio
                             </button>
+
                             <Link href={'/lobby'}>
                                 <a
-                                    className="w-80 text-center bg-black px-7 py-2 mt-5
-                                rounded text-white"
+                                    className="w-80 text-center bg-black py-2 mt-5
+                                rounded-xl text-white"
                                 >
                                     Iniciar o unirse a una llamada
                                 </a>
@@ -69,7 +78,8 @@ function Home() {
 
                     <motion.div
                         animate={{ scale: [0, 1] }}
-                        transition={{ ease: 'easeIn', duration: 1}}
+                        transition={{ ease: 'easeIn', duration: 1 }}
+                        className={'hidden lg:block'}
                     >
                         <Image
                             alt={'Landing page image'}
@@ -79,7 +89,6 @@ function Home() {
                         />
                     </motion.div>
                 </div>
-                
             </div>
             <div>
                 <Footer />

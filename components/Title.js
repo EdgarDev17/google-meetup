@@ -6,7 +6,7 @@ import { useState } from 'react'
 function Title({ label }) {
     return (
         <>
-            <h1 className={`font-bold my-1 text-5xl `}>{label}</h1>
+            <h1 className={`text-3xl font-bold my-1 lg:text-5xl `}>{label}</h1>
         </>
     )
 }
